@@ -2,7 +2,7 @@
 
 > A recruiter-focused personal portfolio showcasing full-stack development, database engineering, and applied machine learning projects.
 
-**Live Portfolio:** _[Add the deployed portfolio URL here](https://portfolio-website-tailwind-sage.vercel.app/)_
+**Live Portfolio:** _[Visit](https://portfolio-website-tailwind-sage.vercel.app/)_
 
 ---
 
