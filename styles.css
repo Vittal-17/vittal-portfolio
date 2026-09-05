@@ -38,6 +38,68 @@ body::before {
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 
+/* =========================
+   ACCESSIBILITY PRIMITIVES
+   ========================= */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 200;
+  padding: 12px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 13px;
+  transition: top .18s ease;
+}
+
+.skip-link:focus-visible {
+  top: 14px;
+}
+
+/* Dark ring reads against the light paper and against every light card.
+   Offset keeps it clear of the element's own border radius. */
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Gallery arrows float over screenshots of unknown colour, so they get the
+   high-luminance accent ring instead of the dark one. */
+.gallery-arrow:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  opacity: 1;
+}
+
+/* The gallery container is focusable for arrow-key browsing — surface its
+   controls as soon as it receives focus. */
+.project-gallery:focus-within .gallery-arrow,
+.project-gallery:focus-within .gallery-caption {
+  opacity: 1;
+}
+
+.project-gallery:focus-within .gallery-caption {
+  transform: translateY(0);
+}
+
 .page-noise {
   position: fixed;
   inset: 0;
@@ -142,10 +204,26 @@ button { font: inherit; }
   text-transform: uppercase; letter-spacing: .08em;
 }
 .pulse-dot { width: 8px; height: 8px; background: #1fc46d; border-radius: 50%; box-shadow: 0 0 0 6px rgba(31,196,109,.1); }
-.kicker, .card-label, .eyebrow-text, .project-label {
+.card-label, .eyebrow-text, .project-label {
   font: 600 11px "DM Mono", monospace; letter-spacing: .15em; text-transform: uppercase; color: #6d6d6d;
 }
 .hero-copy { max-width: 760px; }
+
+/* Identity ladder: who → what role → what they build. */
+.hero-identity {
+  margin: 26px 0 0;
+  font: 600 12px "DM Mono", monospace;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+.hero-role {
+  margin: 6px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--muted);
+}
 .hero-copy h1 {
   margin: 14px 0 0;
   font-size: clamp(3.2rem, 7vw, 6.8rem);
@@ -159,6 +237,31 @@ button { font: inherit; }
 }
 .hero-lede { max-width: 680px; margin-top: 22px; color: #5b5b5b; font-size: 17px; line-height: 1.8; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+/* One dominant action, then a quiet row of professional links. Grouping them
+   in a single wrapper matters: .hero-card is justify-content: space-between,
+   so a loose 5th child would be flung to the far edge of the card. */
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 20px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.hero-links a {
+  font: 500 12px "DM Mono", monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #4f4f4f;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+.hero-links a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   min-height: 46px; padding: 0 17px; border-radius: 14px; font-weight: 700; font-size: 14px;
@@ -169,6 +272,11 @@ button { font: inherit; }
 .btn-light { background: #f6f5ef; border: 1px solid var(--line); color: #111; }
 .btn.small { min-height: 40px; padding: 0 13px; border-radius: 12px; font-size: 12px; }
 .btn.disabled { opacity: .45; pointer-events: none; }
+
+/* The single most important action on its surface — sized to win. */
+.btn-primary { min-height: 54px; padding: 0 24px; font-size: 15px; }
+.btn-primary span { transition: transform .2s ease; }
+.btn-primary:hover span { transform: translateX(3px); }
 .hero-foot { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; color: #737373; font: 500 11px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
 
 .portrait-card {
@@ -177,18 +285,69 @@ button { font: inherit; }
   padding: 20px;
   background: #141414;
   color: #fff;
+  /* The hero card grew taller once the identity ladder was added; this lets
+     the portrait absorb the slack and keeps AT A GLANCE anchored low, so the
+     two cards in row 1 read as one composition instead of two ragged ones. */
+  display: flex;
+  flex-direction: column;
 }
 .portrait-card .card-label { color: #979797; }
-.portrait-wrap { height: 215px; display: grid; place-items: center; position: relative; }
+.portrait-wrap { flex: 1; min-height: 215px; display: grid; place-items: center; position: relative; }
 .portrait-halo { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(135deg, #d8ff4e, #c9d8ff); filter: blur(10px); opacity: .82; }
 .portrait { position: relative; width: 168px; height: 168px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,.8); box-shadow: 0 15px 45px rgba(0,0,0,.35); }
 .portrait-meta { display: flex; align-items: end; justify-content: space-between; gap: 14px; }
 .portrait-meta h2 { margin: 0; font-size: 24px; letter-spacing: -.04em; }
-.portrait-meta p { margin: 4px 0 0; color: #aaa; font-size: 13px; }
-.mini-badge { padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.08); font: 500 11px "DM Mono",monospace; color: #ddd; }
 
-.stat-card { grid-column: span 4; padding: 22px; min-height: 265px; }
-.stat-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+/* AT A GLANCE — the four facts a recruiter scans for, stated plainly. */
+.glance { margin-top: 22px; }
+.glance-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #9d9d9d;
+  font: 600 10px "DM Mono", monospace;
+  letter-spacing: .16em;
+}
+.glance-divider::before,
+.glance-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: rgba(255,255,255,.14);
+}
+.glance-list { margin: 4px 0 0; }
+.glance-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.glance-row:last-child { border-bottom: 0; }
+.glance-row dt {
+  font: 500 10px "DM Mono", monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9d9d9d;
+  flex: none;
+}
+.glance-row dd {
+  margin: 0;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #f0f0f0;
+}
+
+/* Row 2 of the hero grid mirrors row 1's 8/4 rhythm, so no column is orphaned. */
+.stat-card { grid-column: span 8; padding: 22px; min-height: 265px; }
+/* Explicit counts rather than auto-fit: auto-fit only avoids a ragged last row
+   when the track count happens to divide the item count, and at intermediate
+   widths it lands on 3 tracks for 4 cells. 4 → 2 always divides evenly.
+   See the shared card-grid breakpoint block below. */
+.stat-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .stat-grid > div { padding: 15px; border-radius: 16px; background: #f3f2ed; border: 1px solid var(--line); }
 .stat-grid strong { display: block; font-size: 15px; }
 .stat-grid span { display: block; margin-top: 4px; color: #777; font-size: 11px; line-height: 1.5; }
@@ -216,7 +375,13 @@ button { font: inherit; }
 .journey-row strong { display:block; font-size:13px; line-height:1.4; }
 .journey-row span:not(.journey-icon) { display:block; margin-top:4px; color:#737373; font-size:11px; line-height:1.5; }
 
-.project-wide { grid-column: span 7; }
+/* Project grid spans are declared semantically, not positionally, so the
+   order of the cards can change and new cards can be added without the
+   layout silently reshuffling.
+     .project-flagship → full 12 columns (headline builds)
+     .project-half     → 6 columns, pairs up with another half   */
+.project-flagship { grid-column: span 12; }
+.project-half { grid-column: span 6; }
 .project-card { display:flex; flex-direction:column; }
 .project-card .project-visual { position:relative; overflow:hidden; background:#e8e7e1; }
 
@@ -245,6 +410,17 @@ button { font: inherit; }
 .project-gallery .gallery-image.active {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Opt a gallery out of the 16/9 frame when its source screenshots are wider.
+   CYPHR's are 1920×~992 (≈1.94), so a 16/9 frame would object-fit: cover away
+   ~4% of each side — precisely where the sidebar wordmark sits on the left and
+   the model selector and theme toggle sit on the right. Matching the frame to
+   the source ratio keeps every piece of evidence inside the frame.
+   Three classes deep on purpose: it has to outrank
+   `.project-card .project-visual img`, which also declares aspect-ratio. */
+.project-gallery.gallery-native .gallery-image {
+  aspect-ratio: 1920 / 992;
 }
 
 .gallery-arrow {
@@ -360,6 +536,27 @@ button { font: inherit; }
 
 .gallery-caption-label {
   display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Light/dark pairs sit next to each other in the CYPHR gallery — this chip
+   names which one you're looking at, so the two themes read as one product
+   with a theme system rather than two different products. */
+.gallery-theme {
+  flex: none;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.22);
+  font-size: 9px;
+  letter-spacing: .1em;
+}
+
+.gallery-theme:empty {
+  display: none;
 }
 
 @media (max-width: 640px) {
@@ -382,10 +579,6 @@ button { font: inherit; }
     right: 10px;
     bottom: 10px;
   }
-
-  .gallery-dots {
-    bottom: 10px;
-  }
 }
 
 .project-card .project-visual img { display:block; width:100%; aspect-ratio: 16/9; object-fit:cover; transition: transform .45s ease; }
@@ -402,26 +595,49 @@ button { font: inherit; }
 .metric-highlight { display:flex; align-items:baseline; gap:8px; margin-top:15px; }
 .metric-highlight strong { font-size:26px; letter-spacing:-.05em; }
 .metric-highlight span { color:#777; font-size:11px; }
+
+/* Curated engineering evidence for the flagship card — same visual family as
+   .stat-grid, so it reads as part of the existing system. */
+.capability-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.capability-grid > div {
+  padding: 15px;
+  border-radius: 16px;
+  background: #f3f2ed;
+  border: 1px solid var(--line);
+}
+.capability-grid strong {
+  display: block;
+  font: 600 10px "DM Mono", monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #4a4a4a;
+}
+.capability-grid span {
+  display: block;
+  margin-top: 6px;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.capability-grid code {
+  font: 500 11px "DM Mono", monospace;
+  padding: 1px 4px;
+  border-radius: 5px;
+  background: rgba(18,18,18,.06);
+}
+
 .project-actions { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:18px; }
 .subtle { color:#8b8b8b; font-size:11px; }
+.tertiary-link { margin-top: 0; font-size: 12px; color: #5f5f5f; }
 
-.library-art {
-  min-height: 180px; display:grid; place-items:center; gap:8px; align-content:center;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(201,216,255,.95), transparent 30%),
-    linear-gradient(135deg, #eef3ff, #f4f4ee 55%, #efffd3);
-}
-.library-icon { font-size:64px; filter: drop-shadow(0 16px 14px rgba(0,0,0,.1)); }
-.library-art span:last-child { font:600 10px "DM Mono",monospace; letter-spacing:.12em; color:#666; }
-.project-grid > article:nth-child(2){ grid-column: span 5; }
-.project-grid > article:nth-child(3){ grid-column: span 5; }
-.mini-project { grid-column: span 3; min-height: 220px; padding: 24px; }
-.mini-project h3 { margin: 38px 0 0; font-size: 24px; line-height:1.02; letter-spacing:-.04em; }
-.mini-project p { margin: 12px 0 0; color:#6a6a6a; font-size:13px; line-height:1.7; }
-.mini-project.accent { background:#151515; color:#fff; }
-.mini-project.accent .card-label, .mini-project.accent p { color:#a9a9a9; }
-
-.contact-grid { grid-template-columns: 8fr 4fr; }
+/* .contact-grid deliberately has no grid-template-columns of its own: it
+   inherits the shared 12-column .bento-grid track list, which is what its
+   children's `span 8` / `span 4` declarations are written against. */
 .contact-main { grid-column: span 8; padding: 34px; min-height: 330px; background:
   radial-gradient(circle at 85% 20%, rgba(216,255,78,.45), transparent 30%),
   radial-gradient(circle at 5% 90%, rgba(201,216,255,.7), transparent 35%), #fff;
@@ -436,23 +652,109 @@ button { font: inherit; }
 .contact-line strong { display:block; font-size:13px; }
 .contact-line small { display:block; margin-top:4px; color:#777; line-height:1.4; }
 
+/* Social links stay reachable but stop competing with email and résumé. */
+.contact-tertiary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.contact-tertiary a {
+  font: 500 12px "DM Mono", monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #5f5f5f;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+.contact-tertiary a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
 .footer { max-width:1180px; margin:0 auto; padding: 28px 18px 40px; display:flex; justify-content:space-between; gap:20px; color:#777; font-size:11px; border-top:1px solid var(--line); }
+.footer-links a { border-bottom: 1px solid transparent; }
+.footer-links a:hover { color: var(--ink); border-bottom-color: var(--line); }
 
 .reveal { opacity:0; transform:translateY(18px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 .delay-1 { transition-delay:.08s; } .delay-2 { transition-delay:.16s; } .delay-3 { transition-delay:.24s; } .delay-4 { transition-delay:.32s; }
 
+/* =========================
+   BEYOND CODE
+
+   This block used to live inside the dark #141414 portrait card, so every
+   colour here was white-alpha. It now sits on a light bento surface in the
+   About section, so the greys are re-derived against #fff rather than
+   simply moved.
+
+   These two base rules sit ABOVE the media queries on purpose: they are
+   overridden below (.beyond-card at 900/640, .hobby-list at 1100/560) and
+   media queries add no specificity, so a base rule declared after them
+   would silently win at every width. The purely visual .hobby-item rules
+   have no responsive override and stay at the end of the file.
+   ========================= */
+
+.beyond-card {
+  grid-column: span 12;
+  padding: 24px;
+}
+
+.hobby-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* =========================
+   CARD-INTERNAL GRIDS
+
+   Every count below divides its item count exactly (stack 4, capabilities 4,
+   hobbies 6), so no card ever ends on a ragged half-empty row.
+   ========================= */
+
+@media (max-width: 1100px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .capability-grid { grid-template-columns: repeat(2, 1fr); }
+  .hobby-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .capability-grid { grid-template-columns: 1fr; }
+  .hobby-list { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 900px) {
   .desktop-nav { display:none; }
   .menu-button { display:flex; }
   .hero-card { grid-column: span 12; min-height: 560px; }
-  .portrait-card, .stat-card, .intro-card { grid-column: span 6; }
+  /* Portrait 6 + stack 6 fills the row; approach then takes a full row of its
+     own rather than being left as a 6-column orphan. */
+  .portrait-card, .stat-card { grid-column: span 6; }
+  .intro-card { grid-column: span 12; }
   .about-main { grid-column: span 7; }
   .skills-card { grid-column: span 5; }
-  .journey-card { grid-column: span 12; }
-  .project-wide, .project-grid > article:nth-child(2), .project-grid > article:nth-child(3) { grid-column: span 12; }
-  .mini-project { grid-column: span 6; }
+  .journey-card, .beyond-card { grid-column: span 12; }
+  .project-flagship, .project-half { grid-column: span 12; }
   .contact-main, .contact-side-card { grid-column: span 12; }
+
+  /* Text links are visually quiet by design, but a 15–19px-tall hit area is
+     not usable with a thumb — pad them out to a 44px target without changing
+     how they look. This sits at 900 rather than 640 because 900 is where the
+     site switches to the touch layout (hamburger nav), so it covers iPad
+     portrait at 768 too. */
+  .hero-links a,
+  .contact-tertiary a,
+  .footer-links a,
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .hero-links, .contact-tertiary { gap: 0 20px; margin-top: 8px; }
 }
 
 @media (max-width: 640px) {
@@ -464,8 +766,14 @@ button { font: inherit; }
   .hero-copy h1 { font-size: clamp(2.9rem, 14vw, 4.4rem); }
   .hero-lede { font-size: 15px; line-height:1.7; }
   .hero-foot { line-height:1.5; }
-  .portrait-card, .stat-card, .intro-card, .about-main, .skills-card, .journey-card, .project-wide,
-  .project-grid > article:nth-child(2), .project-grid > article:nth-child(3), .mini-project,
+  /* The availability eyebrow is a full sentence now — let it wrap instead of
+     forcing horizontal overflow on a 375px viewport. */
+  .eyebrow { align-items: flex-start; line-height: 1.45; font-size: 10px; letter-spacing: .06em; }
+  .pulse-dot { margin-top: 4px; flex: none; }
+  .hero-identity { margin-top: 20px; }
+  .btn-primary { width: 100%; }
+  .portrait-card, .stat-card, .intro-card, .about-main, .skills-card, .journey-card,
+  .beyond-card, .project-flagship, .project-half,
   .contact-main, .contact-side-card { grid-column: span 12; }
   .portrait-card { min-height: 300px; }
   .stat-card, .intro-card { min-height: 235px; }
@@ -486,48 +794,39 @@ button { font: inherit; }
   }
 }
 
+/* iPad landscape and touch laptops sit ABOVE the 900px breakpoint but are
+   still driven by a thumb, so the quiet text links are padded out by pointer
+   capability rather than by width alone. Width-based padding cannot express
+   this — a 1024px touch screen and a 1024px mouse screen are the same width
+   and want different hit areas. */
+@media (pointer: coarse) {
+  .hero-links a,
+  .contact-tertiary a,
+  .footer-links a,
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
   *,*::before,*::after { animation:none !important; transition:none !important; }
   .reveal { opacity:1; transform:none; }
 }
 
-.beyond-code {
-  margin-top: 26px;
-}
-
-.beyond-divider {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #737373;
-  font: 600 10px "DM Mono", monospace;
-  letter-spacing: .16em;
-}
-
-.beyond-divider::before,
-.beyond-divider::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: rgba(255,255,255,.12);
-}
-
-.hobby-list {
-  display: grid;
-  gap: 7px;
-  margin-top: 14px;
-}
-
 .hobby-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 11px;
+  padding: 10px 12px;
   border-radius: 12px;
-  color: #e9e9e9;
-  background: rgba(255,255,255,.045);
-  border: 1px solid rgba(255,255,255,.07);
+  color: #3f3f3f;
+  font-size: 13px;
+  font-weight: 600;
+  background: #f3f2ed;
+  border: 1px solid var(--line);
 
   opacity: 0;
   transform: translateY(10px);
@@ -540,12 +839,14 @@ button { font: inherit; }
   display: grid;
   place-items: center;
   border-radius: 9px;
-  background: rgba(255,255,255,.07);
+  background: #fff;
+  border: 1px solid var(--line);
   font-size: 14px;
+  flex: none;
 }
 
 .hobby-item:hover {
-  background: rgba(255,255,255,.08);
+  background: #efeee8;
   transform: translateY(-1px);
 }
 
@@ -561,4 +862,10 @@ button { font: inherit; }
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* The animation is a forwards-filling keyframe, so the reduced-motion block's
+   `animation: none` would strand these items at opacity 0. Restore them. */
+@media (prefers-reduced-motion: reduce) {
+  .hobby-item { opacity: 1; transform: none; }
 }

@@ -1,89 +1,156 @@
-# Vittal J G — Developer Portfolio
+# Vittal J G — Full-Stack Engineer Portfolio
 
-> A recruiter-focused personal portfolio showcasing full-stack development, database engineering, and applied machine learning projects.
+> A recruiter-focused personal portfolio showcasing production web applications, AI systems, applied machine learning, and database-backed software projects.
 
-**Live Portfolio:** _[Visit](https://portfolio-website-tailwind-sage.vercel.app/)_
+**Live Portfolio:** https://vittal-dev.vercel.app/
 
 ---
 
 ## Overview
 
-This portfolio is the central showcase for my software development work, designed to give recruiters and hiring teams a single place to explore the applications I have built.
+This portfolio is the central showcase for my software engineering work, designed to give recruiters and hiring teams a clear view of the systems I build.
 
-Instead of linking to each project separately from my resume, the portfolio acts as a project hub where visitors can:
+The portfolio presents my work by **engineering depth**—from document-grounded AI retrieval systems and production full-stack applications to applied machine learning and database-backed workflow software.
 
-- Learn about my technical background and development focus
-- Explore my flagship **EazyShop E-Commerce Platform**
-- Inspect the **AI House Price Estimator**
+Visitors can:
+
+- Learn about my engineering background and current focus
+- Explore **CYPHR**, a document-grounded RAG platform
+- Inspect the **EazyShop** production full-stack commerce platform
+- Explore the **AI House Price Estimator**
 - Preview the **Library Management System**
-- Browse project screenshots directly through interactive galleries
-- Visit live deployments and source repositories
-- Learn more about my technical interests, education, and experience
+- Browse interactive project screenshot galleries
+- Visit live deployments, API documentation, and source repositories
+- Access my résumé directly
 
-The visual system uses a modern **Bento Grid** layout with subtle motion, responsive behavior, and a project-first presentation.
+The site uses a responsive **Bento Grid** layout, restrained motion, interactive galleries, and accessibility improvements to create a project-first recruiter experience.
 
 ---
 
-## Featured Projects
+# Featured Projects
 
-### 🛒 EazyShop — E-Commerce Platform
+## 🧠 CYPHR — Document-Grounded RAG Platform
 
-My flagship full-stack project.
+### Flagship · AI Systems
 
-EazyShop is a database-backed e-commerce application built with a React frontend and Django REST backend. It covers the core shopping lifecycle alongside administrative functionality.
+CYPHR is a retrieval-augmented chat platform designed to answer questions **strictly from documents uploaded by the user**.
 
-#### Key areas covered
+PDF documents are extracted, chunked, embedded, and indexed for vector retrieval. Answers are grounded in the uploaded knowledge base and include source provenance, including the relevant source file and page.
 
-- User authentication
+### Engineering Highlights
+
+#### Document ingestion
+- PDF upload workflow
+- Text extraction
+- Chunked document passages
+- Embedded passages for semantic retrieval
+
+#### Retrieval
+- MongoDB Atlas Vector Search
+- `$vectorSearch`
+- Jina Embeddings v3
+- Document-grounded semantic retrieval
+
+#### AI models
+- Six configurable LLM providers
+- Runtime model/provider selection
+- Retrieval-augmented answer generation
+
+#### Security
+- Google OAuth
+- Per-user tenant isolation
+- CSRF protection
+- Origin validation
+- Tiered rate limits
+
+### Quality
+- **125 automated tests**
+- Security and regression coverage
+- Current release: **v0.1.0**
+
+### Stack
+- FastAPI
+- React
+- MongoDB Atlas
+- Vector Search
+- RAG
+- Jina Embeddings
+
+### Screenshot Gallery
+
+The portfolio includes a **14-image gallery** covering both dark and light themes:
+
+- Grounded answers with citations
+- Indexed-document workspace
+- Knowledge base and PDF ingestion
+- Empty document states
+- Login and registration
+- Backend wake-up/loading states
+
+**Live Project:** https://cyphr-rag.vercel.app/
+
+**GitHub:** https://github.com/Vittal-17/CYPHR-RAG
+
+> Note: The backend may sleep when idle, so the first request can take a moment while it wakes up.
+
+---
+
+## 🛒 EazyShop — Production Full-Stack Commerce Platform
+
+### Production Full-Stack
+
+EazyShop is a database-backed **Django REST + React** commerce platform covering the complete shopping lifecycle alongside administrative workflows.
+
+### Customer functionality
+- Authentication
 - Product catalogue
 - Product details
 - Shopping cart
 - Wishlist
 - Checkout
+- Payments
 - Address management
 - Orders and order history
 - Reviews
 - Gift cards
-- Payments
 - User dashboard
-- Admin product management
-- Admin category management
-- Admin order management
-- Admin user management
-- Admin review management
-- Admin audit logs
+
+### Administration
+- Product management
+- Category management
+- Order management
+- User management
+- Review management
+- Audit logging
 
 The portfolio includes an **interactive 23-image gallery** so visitors can inspect the application before opening the live project.
 
-**Live Project:**  
-https://django-react-ecommerce-platform.vercel.app
+**Live Project:** https://django-react-ecommerce-platform.vercel.app/
 
-**GitHub:**  
-https://github.com/Vittal-17/django-react-ecommerce-platform
+**GitHub:** https://github.com/Vittal-17/django-react-ecommerce-platform
 
 ---
 
-### 🤖 AI House Price Estimator
+## 🤖 AI House Price Estimator
+
+### Applied Machine Learning
 
 An end-to-end machine learning application that predicts California house prices through a web interface.
 
-The project evolved from model experimentation into a complete deployed application with a tuned Random Forest model, REST API, React frontend, versioned releases, and cloud deployment.
+The project evolved from model experimentation into a complete deployed system with model evaluation, hyperparameter tuning, a REST API, a React frontend, and cloud deployment.
 
-#### Machine Learning
-
+### Machine Learning
 - California Housing dataset
 - Linear Regression baseline
 - Decision Tree Regression
 - Random Forest Regression
-- Model comparison using MAE, RMSE and R²
+- Model comparison using MAE, RMSE, and R²
 - GridSearchCV hyperparameter tuning
 - 5-fold cross-validation
 - Feature importance analysis
 - Final tuned Random Forest model
-- Compressed model artifact for deployment
 
-#### Final model
-
+### Final Model
 - Algorithm: Random Forest Regression
 - `n_estimators = 200`
 - `min_samples_leaf = 2`
@@ -92,8 +159,7 @@ The project evolved from model experimentation into a complete deployed applicat
 - MAE: approximately **0.3261**
 - RMSE: approximately **0.5040**
 
-#### Application
-
+### Application
 - React + Vite frontend
 - Tailwind CSS
 - FastAPI backend
@@ -105,39 +171,25 @@ The project evolved from model experimentation into a complete deployed applicat
 - Responsive UI
 - Swagger API documentation
 
-#### Deployment
+**Live App:** https://aihouseprice.vercel.app/
 
-- Frontend: Vercel
-- Backend: Render
-- Public Swagger documentation
+**API:** https://aihouseprice.onrender.com/
 
-**Live App:**  
-https://aihouseprice.vercel.app
+**Swagger Docs:** https://aihouseprice.onrender.com/docs
 
-**API:**  
-https://aihouseprice.onrender.com
-
-**Swagger Docs:**  
-https://aihouseprice.onrender.com/docs
-
-**GitHub:**  
-https://github.com/Vittal-17/ai-house-price-estimator
-
-The portfolio includes a project gallery covering the main interface, dataset view, and prediction result.
+**GitHub:** https://github.com/Vittal-17/ai-house-price-estimator
 
 ---
 
-### 📚 Library Management System
+## 📚 Library Management System
+
+### Full-Stack Application
 
 A database-backed library management application focused on managing the complete library workflow.
 
-The project combines user-facing functionality with administrative workflows.
-
-#### Key areas covered
-
+### Key Areas
 - Authentication
-- Book catalogue
-- Book details
+- Book catalogue and details
 - Reservations
 - Borrowed books
 - Fines and overdue tracking
@@ -149,109 +201,128 @@ The project combines user-facing functionality with administrative workflows.
 The portfolio includes a **12-image gallery** showing the current application state.
 
 **Status:** In development
-
 **Deployment:** Coming soon
 
 ---
 
-## Portfolio Features
+# Portfolio Features
 
-### 🧩 Bento Grid Design
+## 🧩 Engineering-First Bento Grid
 
-The site uses a responsive Bento Grid layout to give important content different visual weights and make the portfolio easy to scan.
+The site uses a responsive Bento Grid layout to give projects different visual weights based on engineering depth.
 
-The flagship e-commerce project receives the largest visual area, while the AI and LMS projects are presented alongside supporting profile, skills, journey, and contact sections.
+The portfolio is structured around:
 
-### 🖼️ Project Screenshot Galleries
+1. **CYPHR** — Retrieval engineering and AI systems
+2. **EazyShop** — Production full-stack commerce
+3. **AI House Price Estimator** — Applied machine learning
+4. **Library Management System** — Database-backed application workflows
 
-Each major project can be explored directly inside the portfolio.
+Supporting cards provide a quick profile, technical focus, skills, development journey, and personal interests.
 
-Current galleries:
+---
 
+## 🖼️ Interactive Project Galleries
+
+### Current galleries
+- CYPHR: **14 screenshots**
 - EazyShop: **23 screenshots**
 - AI House Price Estimator: **3 screenshots**
 - Library Management System: **12 screenshots**
 
-Gallery features include:
-
-- Previous / next navigation
-- Screenshot counter
-- Screenshot captions
+### Gallery features
+- Previous and next navigation
+- Screenshot counters
+- Contextual captions
 - Keyboard navigation
 - Neighboring-image preloading
 - Responsive controls
+- Accessible live announcements for screenshot changes
+- Descriptive image alt text
+- Dark/light theme labels for CYPHR screenshots
 
-### ✨ Motion & Interaction
+---
 
-The interface uses restrained motion to create a premium feel without distracting from the projects.
+## ♿ Accessibility
 
-Examples include:
+The portfolio includes:
+
+- Skip-to-content navigation
+- Keyboard-accessible galleries
+- Left and right arrow-key screenshot navigation
+- Escape-key support for the mobile menu
+- Accessible mobile navigation state
+- Live regions for gallery changes
+- Improved image descriptions
+- Reduced-motion support
+
+---
+
+## ✨ Motion & Interaction
+
+The interface uses restrained motion without distracting from the projects.
 
 - Scroll-reveal animations
 - Staggered Bento card entrances
-- Staggered “Beyond Code” hobby animations
 - Project image hover effects
 - Gallery transitions
 - Button hover states
 - Responsive mobile navigation
-
-Reduced-motion support is also included.
-
-### 📱 Responsive Design
-
-The layout adapts across desktop, tablet, and mobile devices.
-
-On smaller screens:
-
-- Navigation collapses into a hamburger menu
-- Bento cards stack into a single-column layout
-- Gallery controls remain touch-friendly
-- Captions remain readable without hover
+- Reduced-motion support
 
 ---
 
-## Beyond Code
+# At a Glance
 
-The portfolio also includes a small personal section to show the person behind the projects.
+| | |
+|---|---|
+| **Role** | Full-Stack Engineer |
+| **Location** | Bengaluru, India |
+| **Focus** | Full-stack systems + AI |
+| **Education** | BCA — Computer Applications |
 
-Interests include:
+---
+
+# Beyond Code
 
 - 🎮 Gaming
 - 🏋️ Gym / training
 - 🎧 Music
 - 🎌 Anime
 - 📖 Reading
-- 🧠 Learning new things
+- 🧠 Always learning
 
 ---
 
-## About Me
+# About Me
 
-I'm Vittal J G, a BCA developer interested in building practical software across:
+I'm **Vittal J G**, a Full-Stack Engineer focused on building complete software systems.
 
-- Full-stack web development
-- Backend development
-- SQL and relational databases
-- REST APIs
-- Machine learning
-- Software engineering
+> **Database → API → Interface → Deployment**
 
-I enjoy learning by building complete systems—from database design and API development to frontend interfaces and deployment.
+My work spans:
+
+- Production full-stack web applications
+- Backend systems and REST APIs
+- SQL and database-backed workflows
+- Document-grounded AI systems
+- Retrieval-augmented generation
+- Applied machine learning
+- Cloud deployment and production workflows
+
+I learn best by building complete systems rather than isolated demos—from database design and backend APIs to frontend interfaces, security, testing, and deployment.
 
 ---
 
-## Technical Stack
+# Technical Stack
 
-### Portfolio Frontend
-
+## Portfolio
 - HTML5
 - CSS3
 - Vanilla JavaScript
 - Google Fonts
-- Responsive layout and interaction design
 
-### Full-Stack Projects
-
+## Full-Stack Engineering
 - Python
 - Django
 - Django REST Framework
@@ -263,8 +334,15 @@ I enjoy learning by building complete systems—from database design and API dev
 - SQL
 - Tailwind CSS
 
-### Machine Learning
+## AI & Retrieval Systems
+- Retrieval-Augmented Generation (RAG)
+- MongoDB Atlas
+- Vector Search
+- Jina Embeddings
+- LLM integrations
+- Document ingestion pipelines
 
+## Machine Learning
 - Python
 - Pandas
 - NumPy
@@ -273,11 +351,9 @@ I enjoy learning by building complete systems—from database design and API dev
 - GridSearchCV
 - Joblib
 
-### Tools & Workflow
-
+## Tools & Workflow
 - Git
 - GitHub
-- GitHub Releases
 - Vercel
 - Render
 - Postman
@@ -285,85 +361,49 @@ I enjoy learning by building complete systems—from database design and API dev
 
 ---
 
-## Project Philosophy
-
-Each featured project demonstrates a different part of my engineering journey:
+# Project Philosophy
 
 | Project | What it demonstrates |
 |---|---|
-| **EazyShop** | Full-stack engineering, database-backed application design, REST APIs and e-commerce workflows |
-| **AI House Price Estimator** | Machine learning, model evaluation, API development and cloud deployment |
-| **Library Management System** | Database design, business workflows, reporting and administration |
-| **Portfolio Website** | Frontend design, responsive UX, JavaScript interactions and project presentation |
+| **CYPHR** | Retrieval engineering, RAG architecture, vector search, document ingestion, AI integrations, security, and automated testing |
+| **EazyShop** | Production full-stack engineering, database-backed design, REST APIs, payments, administration, and audit workflows |
+| **AI House Price Estimator** | Applied machine learning, model evaluation, API development, frontend integration, and cloud deployment |
+| **Library Management System** | Database design, business workflows, reporting, and administration |
+| **Portfolio Website** | Frontend engineering, responsive UX, accessibility, JavaScript interactions, and project presentation |
 
 ---
 
-## Local Development
+# Local Development
 
 This portfolio is intentionally lightweight and does not require a frontend framework or build system.
 
-### Requirements
-
+## Requirements
 - Modern web browser
 - Optional local static server
 
-### Run locally
+## Run Locally
 
-You can open `index.html` directly in a browser, or use a simple static server such as VS Code Live Server.
+```bash
+git clone https://github.com/Vittal-17/vittal-portfolio.git
+cd vittal-portfolio
+```
+
+Open `index.html` directly in a browser, or use a local static server such as VS Code Live Server.
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```text
-Portfolio/
+vittal-portfolio/
 ├── images/
+│   ├── cyphr/
+│   │   ├── dark/
+│   │   └── light/
 │   ├── aihouseprice/
-│   │   ├── home.png
-│   │   ├── predicted_price.png
-│   │   └── sample_data_set.png
-│   │
 │   ├── eazyshop/
-│   │   ├── eazyshop_home.png
-│   │   ├── home_loggedin.png
-│   │   ├── products.png
-│   │   ├── product_details.png
-│   │   ├── cart.png
-│   │   ├── wishlist.png
-│   │   ├── checkout1.png
-│   │   ├── checkout2.png
-│   │   ├── rzp1.png
-│   │   ├── rzp2.png
-│   │   ├── order_success.png
-│   │   ├── gift_card.png
-│   │   ├── login.png
-│   │   ├── register.png
-│   │   ├── user_profile.png
-│   │   ├── user_dashboard.png
-│   │   ├── admin_products1.png
-│   │   ├── admin_products2.png
-│   │   ├── admin_categories.png
-│   │   ├── admin_orders.png
-│   │   ├── admin_users.png
-│   │   ├── admin_reviews.png
-│   │   └── admin_logs.png
-│   │
 │   ├── lms/
-│   │   ├── home.png
-│   │   ├── Login.png
-│   │   ├── book_catalog1.png
-│   │   ├── book_catalog2.png
-│   │   ├── book_details1.png
-│   │   ├── book_details2.png
-│   │   ├── book_reservations.png
-│   │   ├── borrowed_books.png
-│   │   ├── fines.png
-│   │   ├── admin_addnewbook.png
-│   │   ├── admin_members.png
-│   │   └── admin_reports.png
-│   │
 │   └── pfpisha.png
-│
 ├── index.html
 ├── styles.css
 ├── package.json
@@ -372,9 +412,9 @@ Portfolio/
 
 ---
 
-## Deployment
+# Deployment
 
-This portfolio is a static site, so it can be deployed directly to platforms such as:
+This portfolio is a static website and can be deployed directly to:
 
 - Vercel
 - Netlify
@@ -383,56 +423,40 @@ This portfolio is a static site, so it can be deployed directly to platforms suc
 
 The portfolio itself does not require a backend server.
 
-The individual projects use their own deployment infrastructure.
+## Current Deployments
 
-### Current project deployments
+**Portfolio:** https://vittal-dev.vercel.app/
 
-**EazyShop:**  
-https://django-react-ecommerce-platform.vercel.app
+**CYPHR:** https://cyphr-rag.vercel.app/
 
-**AI House Price Estimator frontend:**  
-https://aihouseprice.vercel.app
+**EazyShop:** https://django-react-ecommerce-platform.vercel.app/
 
-**AI House Price Estimator API:**  
-https://aihouseprice.onrender.com
+**AI House Price Estimator Frontend:** https://aihouseprice.vercel.app/
 
-**AI House Price Estimator Swagger:**  
-https://aihouseprice.onrender.com/docs
+**AI House Price Estimator API:** https://aihouseprice.onrender.com/
+
+**AI House Price Estimator Swagger:** https://aihouseprice.onrender.com/docs
 
 ---
 
-## Future Improvements
-
-Planned improvements include:
-
-- Add a downloadable résumé
-- Add dedicated project case-study pages
-- Add richer project metrics and engineering highlights
-- Add project-specific GitHub links wherever available
-- Add richer screenshots and demo media
-- Improve accessibility further
-- Add a custom domain
-- Add analytics after deployment
-- Continue refining the Bento layout and micro-interactions
-
----
-
-## Contact
+# Contact
 
 **Vittal J G**
 
-GitHub:  
-https://github.com/Vittal-17
+**Email:** vitthaljg@gmail.com
 
-Instagram:  
-https://www.instagram.com/it.is._v/
+**GitHub:** https://github.com/Vittal-17
 
-Based in Bengaluru, India.
+**Instagram:** https://www.instagram.com/it.is._v/
+
+**Location:** Bengaluru, India
+
+**Résumé:** Available directly from the live portfolio.
 
 ---
 
-## License
+# License
 
-This portfolio is intended as a personal portfolio and project showcase.
+This repository contains my personal portfolio and project showcase.
 
-The code can be used as a learning reference. Project screenshots, branding, personal information, and project-specific assets are personal/project-specific and should not be redistributed without permission.
+The code may be used as a learning reference. Personal information, project screenshots, branding, and project-specific assets should not be redistributed or represented as your own without permission.
