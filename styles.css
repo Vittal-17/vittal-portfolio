@@ -869,3 +869,119 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .hobby-item { opacity: 1; transform: none; }
 }
+
+
+/* =========================
+   PROJECTS LIVE CALLOUT
+========================== */
+
+.projects-live-callout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 12px 18px;
+  background: #f0f4ff;
+  border: 1px solid #c7d7fc;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.projects-live-callout p {
+  margin: 0;
+}
+
+.projects-live-callout a {
+  color: #1A56DB;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.callout-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1A56DB;
+  box-shadow: 0 0 0 3px rgba(26,86,219,0.15);
+  animation: pulse-blue 2s ease-in-out infinite;
+}
+
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(26,86,219,0.15); }
+  50%       { box-shadow: 0 0 0 6px rgba(26,86,219,0.06); }
+}
+
+
+/* =========================
+   KRYPTON CARD VISUAL
+========================== */
+
+.krypton-visual {
+  background: #0a0a0a;
+  border-radius: 10px 10px 0 0;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.krypton-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(26,86,219,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(99,60,219,0.12) 0%, transparent 50%);
+}
+
+.krypton-preview {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 28px 24px;
+}
+
+.krypton-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+}
+
+.krypton-tagline {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px 0;
+}
+
+.krypton-tags-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.krypton-tags-row span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 3px 8px;
+  letter-spacing: 0.05em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout-dot { animation: none; }
+}
