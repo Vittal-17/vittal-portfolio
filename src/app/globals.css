@@ -254,3 +254,104 @@ html.lenis body {
     color: var(--color-ink);
   }
 }
+
+/* ============================================================
+   Motion upgrade — scroll progress, cursor glow, link underline,
+   aurora, pipeline. Transform/opacity-only; the continuous ones
+   are disabled under reduced motion at the end of this block.
+   ============================================================ */
+
+/* Scroll progress bar — scaleX driven by ScrollTrigger */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 60;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--color-accent-2), var(--color-accent) 55%, #eaff8f);
+  box-shadow: 0 0 12px rgba(216, 255, 78, 0.7);
+}
+
+/* Cursor-follow ambient glow — fine-pointer only, moved via GSAP */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 420px;
+  margin: -210px 0 0 -210px;
+  border-radius: 9999px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(216, 255, 78, 0.45), rgba(216, 255, 78, 0.12) 44%, transparent 70%);
+  filter: blur(16px);
+  will-change: transform, opacity;
+  transition: opacity 0.5s ease;
+}
+
+/* Animated link underline — draws in on hover/focus */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  padding-bottom: 2px;
+  transition: background-size 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* 3D scene wrapper for fly-in cards */
+.scene-3d {
+  perspective: 1200px;
+}
+
+/* Hero aurora — slow drifting accent behind content */
+@keyframes aurora-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(7%, -5%, 0) scale(1.15); }
+  66% { transform: translate3d(-6%, 6%, 0) scale(0.95); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+.aurora {
+  filter: blur(44px);
+  animation: aurora-drift 20s ease-in-out infinite;
+}
+
+/* Pipeline strip — traveling lime sweep + node pulse */
+@keyframes pipeline-sweep {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(360%); }
+}
+.pipeline-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  animation: pipeline-sweep 3s linear infinite;
+}
+@keyframes node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(216, 255, 78, 0); }
+  50% { box-shadow: 0 0 0 6px rgba(216, 255, 78, 0.45); }
+}
+.node-pulse {
+  animation: node-pulse 2.8s ease-in-out infinite;
+}
+
+/* New continuous animations off under reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .pipeline-sweep::after,
+  .node-pulse {
+    animation: none !important;
+  }
+  .cursor-glow {
+    display: none !important;
+  }
+}

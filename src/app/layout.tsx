@@ -3,6 +3,8 @@ import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Nav from "@/components/sections/Nav";
 import Footer from "@/components/sections/Footer";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import Cursor from "@/components/ui/Cursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vittal-dev.vercel.app"),
@@ -34,6 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="bg-layer bg-studio" aria-hidden />
         <div className="bg-layer bg-grid" aria-hidden />
         <div className="bg-layer bg-grain" aria-hidden />
+
+        <ScrollProgress />
+        <Cursor />
 
         <a href="#top" className="skip-link">
           Skip to content

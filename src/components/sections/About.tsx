@@ -1,7 +1,8 @@
 import { ABOUT_PARAGRAPHS, AT_A_GLANCE, INTERESTS, PROFILE, SKILL_GROUPS } from "@/lib/content";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
-import Pill from "@/components/ui/Pill";
+import Stagger from "@/components/motion/Stagger";
+import Parallax from "@/components/motion/Parallax";
 
 export default function About() {
   return (
@@ -33,12 +34,14 @@ export default function About() {
         {/* Portrait */}
         <Reveal delay={0.1} className="glass flex flex-col overflow-hidden rounded-3xl md:row-span-2">
           <div className="relative aspect-[4/5] w-full overflow-hidden">
-            <img
-              src="/images/pfpisha.png"
-              alt={`${PROFILE.name}, ${PROFILE.role}`}
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
+            <Parallax speed={6} className="absolute inset-[-8%]">
+              <img
+                src="/images/pfpisha.png"
+                alt={`${PROFILE.name}, ${PROFILE.role}`}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </Parallax>
             <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-transparent" />
           </div>
           <div className="flex flex-col gap-3 p-6">
@@ -64,7 +67,7 @@ export default function About() {
             {SKILL_GROUPS.map((group) => (
               <div key={group.title}>
                 <p className="mb-2 text-sm font-medium text-ink/80">{group.title}</p>
-                <div className="flex flex-wrap gap-1.5">
+                <Stagger className="flex flex-wrap gap-1.5" stagger={0.04}>
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
@@ -73,7 +76,7 @@ export default function About() {
                       {skill}
                     </span>
                   ))}
-                </div>
+                </Stagger>
               </div>
             ))}
           </div>
@@ -81,7 +84,7 @@ export default function About() {
 
         {/* Interests */}
         <Reveal delay={0.1} className="glass rounded-3xl p-7 md:col-span-3">
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+          <Stagger className="flex flex-wrap items-center gap-x-8 gap-y-3" stagger={0.07}>
             <p className="font-mono text-xs uppercase tracking-wider text-ink/40">Beyond code</p>
             {INTERESTS.map((it) => (
               <span key={it.label} className="inline-flex items-center gap-2 text-ink/75">
@@ -89,7 +92,7 @@ export default function About() {
                 {it.label}
               </span>
             ))}
-          </div>
+          </Stagger>
         </Reveal>
       </div>
     </section>

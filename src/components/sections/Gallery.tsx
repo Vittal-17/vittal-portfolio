@@ -59,7 +59,7 @@ export default function Gallery({ items, name }: { items: GalleryItem[]; name: s
           key={current.src}
           src={current.src}
           alt={`${name} — ${current.label}`}
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
 
         <button
