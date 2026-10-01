@@ -16,7 +16,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.72,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.2,
@@ -26,7 +26,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     const onTick = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+    // Do not disable GSAP's lag protection: a dropped frame should catch up
+    // gracefully instead of forcing a burst of work on the next frame.
+    gsap.ticker.lagSmoothing(1000, 33);
 
     // ScrollTriggers are created by child components BEFORE this provider mounts,
     // so their start/end offsets are computed before Lenis changes the document

@@ -1,57 +1,26 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-
-const HeroCanvas = dynamic(() => import("@/components/canvas/HeroCanvas"), { ssr: false });
-
-/* Floating glass tile — part of the no-WebGL / reduced-motion fallback art. */
+/**
+ * Lightweight CSS 3D stage. The original WebGL stage was beautiful but kept a
+ * full-screen render loop alive underneath the page. This keeps the depth,
+ * orbiting core and floating tiles while letting the browser compositor do the
+ * work, so the actual portfolio remains responsive during scroll.
+ */
 function FloatTile({ className, delay }: { className?: string; delay?: string }) {
-  return (
-    <div
-      className={`absolute glass rounded-3xl animate-floaty ${className ?? ""}`}
-      style={{ animationDelay: delay }}
-      aria-hidden
-    />
-  );
+  return <div className={`hero-css-tile absolute rounded-3xl ${className ?? ""}`} style={{ animationDelay: delay }} aria-hidden />;
 }
 
-/**
- * Hero backdrop. Mounts the WebGL canvas on capable clients; otherwise renders
- * the CSS fallback art. The soft ambient glow sits behind both. The whole stage
- * is pointer-events-none so it never intercepts clicks on the hero content.
- */
 export default function HeroStage() {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let webgl = false;
-    try {
-      const c = document.createElement("canvas");
-      webgl = !!(c.getContext("webgl2") || c.getContext("webgl"));
-    } catch {
-      webgl = false;
-    }
-    setEnabled(!reduced && webgl);
-  }, []);
-
   return (
-    <div id="hero-stage" className="pointer-events-none absolute inset-0 -z-0">
-      <div className="canvas-fallback absolute right-[-10%] top-[8%] h-[70vh] w-[70vh] rounded-full" />
-      {enabled ? (
-        <div className="absolute inset-0">
-          <HeroCanvas />
-        </div>
-      ) : (
-        <>
-          <div className="absolute right-[14%] top-1/2 h-56 w-56 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#eaff8f] to-[#c6f04a] shadow-[0_40px_120px_-20px_rgba(216,255,78,0.8)] animate-floaty" />
-          <FloatTile className="right-[8%] top-[18%] h-32 w-32" delay="0s" />
-          <FloatTile className="right-[32%] top-[30%] h-24 w-36" delay="-1.5s" />
-          <FloatTile className="right-[22%] bottom-[16%] h-36 w-28" delay="-3s" />
-          <FloatTile className="right-[40%] bottom-[26%] h-20 w-20" delay="-2.2s" />
-        </>
-      )}
+    <div className="hero-css-stage pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+      <div className="hero-css-glow absolute right-[2%] top-[8%] h-[68%] w-[68%] rounded-full" />
+      <div className="hero-css-orbit hero-css-orbit-a" />
+      <div className="hero-css-orbit hero-css-orbit-b" />
+      <div className="hero-css-core"><span /><i /><b /></div>
+      <FloatTile className="right-[4%] top-[13%] h-20 w-28 bg-accent/45" delay="0s" />
+      <FloatTile className="right-[31%] top-[5%] h-16 w-16 bg-accent-2/55" delay="-1.8s" />
+      <FloatTile className="right-[4%] bottom-[15%] h-28 w-20 bg-white/55" delay="-3.4s" />
+      <FloatTile className="right-[37%] bottom-[8%] h-16 w-24 bg-accent/35" delay="-2.2s" />
     </div>
   );
 }

@@ -15,9 +15,10 @@ import * as THREE from "three";
 const ACCENT = "#d8ff4e";
 const PERIWINKLE = "#c9d8ff";
 
-// Backdrop the transmissive glass refracts. The canvas is alpha (the lime page
-// shows through), so without this the "see-through" body samples empty black.
-const GLASS_BG = new THREE.Color("#eef0ea");
+// Backdrop the transmissive glass refracts. The hero is a dark command surface,
+// so the procedural environment stays ink-green while lime and periwinkle do
+// the lighting work.
+const GLASS_BG = new THREE.Color("#171b18");
 
 type TileSpec = {
   pos: [number, number, number];
@@ -166,7 +167,7 @@ export default function HeroCanvas() {
         {/* Procedural studio env (no network HDR) so the transmissive glass has
             something bright to refract — without it, transmission renders black. */}
         <Environment resolution={128} frames={1}>
-          <color attach="background" args={["#eef0ea"]} />
+          <color attach="background" args={["#171b18"]} />
           <Lightformer intensity={2.8} position={[0, 3, 5]} scale={[9, 9, 1]} color="#ffffff" />
           <Lightformer intensity={1.6} position={[-5, 1, 3]} scale={[5, 5, 1]} color="#d8ff4e" />
           <Lightformer intensity={1.4} position={[5, -2, 3]} scale={[5, 5, 1]} color="#c9d8ff" />

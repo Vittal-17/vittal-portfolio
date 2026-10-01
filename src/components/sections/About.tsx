@@ -3,13 +3,45 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/motion/Reveal";
 import Stagger from "@/components/motion/Stagger";
 import Parallax from "@/components/motion/Parallax";
+import { Activity, ArrowRight, Boxes, Database, Globe2, Server, Sparkles } from "lucide-react";
 
 export default function About() {
   return (
     <section id="about" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:py-32">
-      <SectionHeading eyebrow="About" title="Full systems, built end to end." />
+      <SectionHeading eyebrow="About / operating system" title="An engineer for the whole surface." />
 
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
+      <Reveal className="about-system relative mt-10 overflow-hidden rounded-[30px] bg-ink p-5 text-paper shadow-[0_32px_90px_-46px_rgba(18,18,18,0.75)] sm:p-7">
+        <div className="about-system-grid absolute inset-0 opacity-50" aria-hidden />
+        <div className="relative z-10 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <div className="max-w-md">
+            <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45"><Activity size={13} className="text-accent" /> signal / profile map</div>
+            <p className="mt-4 text-2xl leading-tight tracking-tight text-paper sm:text-3xl">From the first database table to the last pixel on the screen.</p>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-paper/40"><span className="h-1.5 w-1.5 animate-pulse-dot rounded-full bg-accent" /> all systems connected</div>
+        </div>
+
+        <div className="about-route relative z-10 mt-8 grid gap-2 sm:grid-cols-4">
+          {[
+            [Database, "Data", "shape the truth"],
+            [Server, "Backend", "make it reliable"],
+            [Boxes, "Interface", "make it obvious"],
+            [Globe2, "Deploy", "make it real"],
+          ].map(([Icon, label, caption], i) => {
+            const RouteIcon = Icon as typeof Database;
+            return (
+              <div key={label as string} className="about-route-node group relative rounded-2xl border border-white/10 bg-white/[0.045] p-4 transition-colors duration-500 hover:border-accent/40 hover:bg-white/[0.09]">
+                <div className="flex items-start justify-between"><span className="grid h-9 w-9 place-items-center rounded-xl bg-white/10 text-accent transition-transform duration-500 group-hover:rotate-[-8deg] group-hover:scale-110"><RouteIcon size={16} /></span><span className="font-mono text-[9px] text-paper/25">0{i + 1}</span></div>
+                <p className="mt-5 text-sm font-medium text-paper">{label as string}</p>
+                <p className="mt-1 text-xs text-paper/40">{caption as string}</p>
+                {i < 3 && <ArrowRight className="about-route-arrow absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-accent sm:block" size={16} />}
+              </div>
+            );
+          })}
+        </div>
+        <div className="relative z-10 mt-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-paper/35"><Sparkles size={12} className="text-accent" /> no hand-offs / no black boxes / no unfinished edges</div>
+      </Reveal>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-3">
         {/* Intro */}
         <Reveal className="glass flex flex-col justify-between rounded-3xl p-7 md:col-span-2">
           <div className="space-y-4">

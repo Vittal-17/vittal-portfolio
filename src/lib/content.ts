@@ -65,7 +65,7 @@ export const ABOUT_PARAGRAPHS = [
 ];
 
 export const HERO = {
-  eyebrow: PROFILE.availability,
-  titleLines: ["Production web", "applications", "& AI systems"],
+  eyebrow: "AVAILABLE FOR FULL-TIME · SYSTEMS ONLINE",
+  titleLines: ["Build systems", "that feel", "impossible."],
   lead: "I'm Vittal J G — a full-stack engineer who builds complete systems from database to deployment.",
 };

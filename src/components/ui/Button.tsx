@@ -14,7 +14,7 @@ const base =
 const variants = {
   primary: "bg-ink text-paper hover:shadow-float hover:-translate-y-0.5",
   accent: "chip-accent text-ink hover:-translate-y-0.5 hover:shadow-float",
-  outline: "border border-ink/15 bg-white/50 text-ink backdrop-blur hover:border-ink/40 hover:bg-white/80",
+  outline: "border border-ink/15 bg-white/80 text-ink hover:border-ink/40 hover:bg-white",
 };
 
 export default function Button({

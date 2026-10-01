@@ -1,0 +1,54 @@
+/* Light paper, acid lime and periwinkle. No canvas or filter layers. */
+.studio-hero {
+  position: relative;
+  overflow: clip;
+  padding: 135px 24px 28px;
+  background: radial-gradient(ellipse at 50% 80%, #eaffab 0%, transparent 62%);
+}
+.studio-copy { position: relative; z-index: 3; max-width: 960px; margin: auto; text-align: center; }
+.studio-availability { display: inline-flex; align-items: center; gap: 9px; padding: 8px 15px; border: 1px solid #deded1; border-radius: 100px; background: #fffdf7; font-size: 12px; }
+.studio-availability > span { width: 7px; height: 7px; background: #438124; border-radius: 50%; }
+.studio-byline { margin: 27px 0 19px; font: 10px var(--font-mono); letter-spacing: .2em; color: #606357; }
+.studio-copy h1 { font-size: clamp(56px, 7.7vw, 110px); letter-spacing: -.075em; line-height: .98; font-weight: 600; margin: 0; }
+.studio-highlight { position: relative; isolation: isolate; }
+.studio-highlight::before { content: ""; position: absolute; z-index: -1; inset: 52% -3% -2%; background: var(--color-accent); transform: rotate(-2deg); border-radius: 6px; }
+.studio-description { max-width: 530px; margin: 28px auto 0; font-size: 16px; line-height: 1.7; color: #64665b; }
+.studio-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+.studio-showcase { position: relative; max-width: 1140px; height: 390px; margin: 62px auto 0; perspective: 1400px; }
+.studio-disc { position: absolute; inset: 0 14% -40%; border: 1px solid #c2d284; border-radius: 50%; transform: rotateX(65deg); background: #e8f6c8; }
+.studio-flight { position: absolute; width: 48%; top: 0; }
+.studio-flight-center { left: 26%; z-index: 3; }
+.studio-flight-left { left: 0; top: 30px; z-index: 1; }
+.studio-flight-right { right: 0; top: 30px; z-index: 2; }
+.studio-preview { display: block; background: #fff; padding: 6px; border: 1px solid #deded1; border-radius: 18px; box-shadow: 0 18px 32px -20px #30352766; transition: translate .3s ease; }
+.studio-flight-left .studio-preview { transform: rotateY(18deg) rotateZ(-9deg) scale(.84); }
+.studio-flight-right .studio-preview { transform: rotateY(-18deg) rotateZ(9deg) scale(.84); }
+.studio-preview:hover, .studio-preview:focus-visible { translate: 0 -14px; }
+.studio-browser-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 10px 14px; font: 10px var(--font-mono); color: #6c6f63; }
+.studio-browser-dots { font-size: 8px; color: #a1aa8a; }
+.studio-preview img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid #eceee5; border-radius: 10px; }
+.studio-preview-caption { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 10px 9px; font-size: 10px; color: #727567; }
+.studio-preview-caption strong { font-size: 12px; color: var(--color-ink); }
+.studio-sticker { position: absolute; right: 6%; bottom: 0; z-index: 4; background: var(--color-accent-2); padding: 19px 25px; border: 1px solid #b2c3ee; border-radius: 18px; transform: rotate(9deg); font-size: 15px; }
+.studio-sticker svg { position: absolute; right: 12px; top: 12px; }
+.studio-side-note { position: absolute; top: 15px; left: 0; font: 9px var(--font-mono); letter-spacing: .12em; color: #6d7458; }
+.studio-bottom { display: flex; justify-content: space-between; gap: 20px; max-width: 1140px; margin: 38px auto 0; padding-top: 22px; border-top: 1px solid #dfe3d4; font: 9px var(--font-mono); letter-spacing: .12em; color: #686d5a; }
+.studio-bottom a { display: inline-flex; gap: 10px; align-items: center; }
+@media (max-width: 700px) {
+  .studio-hero { padding: 110px 20px 20px; }
+  .studio-description { font-size: 15px; }
+  .studio-showcase { height: 280px; margin-top: 45px; }
+  .studio-flight { width: 76%; }
+  .studio-flight-center { left: 12%; }
+  .studio-flight-left { left: -25%; }
+  .studio-flight-right { right: -25%; }
+  .studio-flight-left .studio-preview, .studio-flight-right .studio-preview { transform: scale(.72) rotate(-10deg); }
+  .studio-flight-right .studio-preview { transform: scale(.72) rotate(10deg); }
+  .studio-sticker { right: 0; bottom: -10px; font-size: 12px; padding: 14px 20px; }
+  .studio-side-note { display: none; }
+  .studio-preview-caption { flex-wrap: wrap; padding: 8px; }
+  .studio-bottom { margin-top: 20px; flex-wrap: wrap; line-height: 1.7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-preview:hover, .studio-preview:focus-visible { translate: none; }
+}

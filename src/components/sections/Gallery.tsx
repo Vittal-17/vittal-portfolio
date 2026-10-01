@@ -26,11 +26,20 @@ export default function Gallery({ items, name }: { items: GalleryItem[]; name: s
     });
   }, [index, items, count]);
 
-  // Keep the active thumbnail in view.
+  // Scroll ONLY the thumbnail strip. scrollIntoView also scrolls ancestors
+  // (including the document), shifting the page around transformed cards.
   useEffect(() => {
     const strip = stripRef.current;
     const active = strip?.querySelector<HTMLElement>(`[data-thumb="${index}"]`);
-    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    if (!strip || !active) return;
+    const left = Math.max(0, Math.min(
+      active.offsetLeft + active.offsetWidth / 2 - strip.clientWidth / 2,
+      strip.scrollWidth - strip.clientWidth,
+    ));
+    strip.scrollTo({
+      left,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    });
   }, [index]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -94,7 +103,7 @@ export default function Gallery({ items, name }: { items: GalleryItem[]; name: s
         {current.label}
       </p>
 
-      <div ref={stripRef} className="mt-3 flex gap-2 overflow-x-auto pb-1">
+      <div ref={stripRef} className="relative mt-3 flex gap-2 overflow-x-auto overscroll-x-contain pb-1">
         {items.map((it, i) => (
           <button
             key={i}
