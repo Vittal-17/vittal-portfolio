@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #121212;
+  --color-muted: #636363;
+  --color-line: #e6e4dc;
+  --color-paper: #f5f4ef;
+  --color-card: #ffffff;
+  --color-accent: #d8ff4e;
+  --color-accent-2: #c9d8ff;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --shadow-soft: 0 1px 2px rgba(18, 18, 18, 0.04), 0 8px 24px rgba(18, 18, 18, 0.06);
+  --shadow-float: 0 24px 60px -20px rgba(18, 18, 18, 0.18);
+}
+
+:root {
+  --radius: 20px;
+  --nav-h: 72px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  transform: translateY(-150%);
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== Ambient light-paper background layers ===== */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.bg-studio {
+  background:
+    radial-gradient(60vw 60vw at 12% -8%, rgba(216, 255, 78, 0.38), transparent 60%),
+    radial-gradient(55vw 55vw at 98% 8%, rgba(201, 216, 255, 0.42), transparent 62%),
+    radial-gradient(80vw 55vw at 50% 115%, rgba(216, 255, 78, 0.16), transparent 60%),
+    var(--color-paper);
+}
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(18, 18, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 18, 18, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 110% 75% at 50% 35%, black 38%, transparent 86%);
+  mask-image: radial-gradient(ellipse 110% 75% at 50% 35%, black 38%, transparent 86%);
+}
+.bg-grain {
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== Glass surfaces ===== */
+/* Keep blur radii modest: backdrop-filter re-samples every scroll frame (worst
+   on the fixed nav), so large radii are the main source of scroll jank here. */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  backdrop-filter: blur(10px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-soft);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: var(--shadow-float);
+}
+
+/* ===== Utilities ===== */
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+.tap-highlight-none {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Accent chip with soft inner glow */
+.chip-accent {
+  background: linear-gradient(180deg, #e5ff78, var(--color-accent));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 6px 18px -8px rgba(216, 255, 78, 0.9);
+}
+
+/* ===== Keyframes ===== */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 32s) linear infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.82); }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.shimmer-text {
+  background: linear-gradient(100deg, var(--color-ink) 30%, var(--color-muted) 50%, var(--color-ink) 70%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Canvas gradient fallback shown before/without WebGL */
+.canvas-fallback {
+  background:
+    radial-gradient(40vw 40vw at 30% 30%, rgba(216, 255, 78, 0.55), transparent 60%),
+    radial-gradient(42vw 42vw at 72% 62%, rgba(201, 216, 255, 0.6), transparent 62%);
+  filter: blur(6px);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(18, 18, 18, 0.18);
+  border-radius: 999px;
+  border: 3px solid var(--color-paper);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(18, 18, 18, 0.32);
+}
+
+/* ===== Lenis smooth scroll ===== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee,
+  .animate-floaty,
+  .animate-pulse-dot,
+  .shimmer-text {
+    animation: none !important;
+  }
+  .shimmer-text {
+    color: var(--color-ink);
+  }
+}
